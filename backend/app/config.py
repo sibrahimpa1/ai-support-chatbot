@@ -25,8 +25,24 @@ class Settings(BaseSettings):
     orders_file: Path = BASE_DIR / "data" / "orders.json"
     database_path: Path = BASE_DIR / "data" / "support.db"
 
+    # NLP pipeline. "ml" = trained intent classifier, "rules" = regex baseline.
+    nlu_mode: str = "ml"
+    intent_features: str = "embedding"  # tfidf | embedding | combined
+    # "hybrid" = embeddings fused with BM25 via RRF; "bm25" = keyword-only baseline.
+    # With bm25_weight = 0 the ranking is pure embeddings, which won on the dev
+    # set; BM25 is still used automatically if the embedding model can't load.
+    retrieval_mode: str = "hybrid"
+    embedding_model: str = "BAAI/bge-small-en-v1.5"
+    model_cache_dir: Path = BASE_DIR / ".cache" / "models"
+    nlu_train_file: Path = BASE_DIR / "data" / "nlu" / "train.jsonl"
+    needs_action_file: Path = BASE_DIR / "data" / "nlu" / "needs_action.jsonl"
+    # Tuned on eval/dev.jsonl with `python -m eval.tune` (never on the test set).
+    action_threshold: float = 0.5
+    bm25_weight: float = 0.0  # weight of the BM25 ranking inside the hybrid fusion
+    confidence_intent_weight: float = 0.35  # offline provider: intent prob vs. retrieval relevance
+
     # Below this confidence the bot hands the conversation to a human.
-    escalation_threshold: float = 0.45
+    escalation_threshold: float = 0.35
     retrieval_top_k: int = 4
     seed_demo_data: bool = True
 

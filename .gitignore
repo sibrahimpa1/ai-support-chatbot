@@ -8,6 +8,7 @@ __pycache__/
 *.py[cod]
 .venv/
 .pytest_cache/
+.cache/
 .ruff_cache/
 
 # Runtime data (re-created and re-seeded on startup)

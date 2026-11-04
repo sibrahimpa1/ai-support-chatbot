@@ -11,6 +11,7 @@ const Conversations = lazy(() => import("./pages/dashboard/Conversations"));
 const Inbox = lazy(() => import("./pages/dashboard/Inbox"));
 const KnowledgeBase = lazy(() => import("./pages/dashboard/KnowledgeBase"));
 const Overview = lazy(() => import("./pages/dashboard/Overview"));
+const ModelQuality = lazy(() => import("./pages/dashboard/ModelQuality"));
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -27,6 +28,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="conversations" element={<Conversations />} />
           <Route path="conversations/:conversationId" element={<Conversations />} />
           <Route path="knowledge-base" element={<KnowledgeBase />} />
+          <Route path="model-quality" element={<ModelQuality />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

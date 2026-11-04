@@ -6,3 +6,4 @@ backend/data/*.db
 .env
 .git
 docs
+backend/.cache

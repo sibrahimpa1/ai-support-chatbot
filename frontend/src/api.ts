@@ -82,12 +82,33 @@ export interface Metrics {
   escalation_reasons: { reason: string; count: number }[];
 }
 
+export interface ModelQuality {
+  n_cases: number;
+  n_with_article: number;
+  intents: Record<string, { accuracy: number; macro_f1: number }>;
+  retrieval: Record<string, { recall_at_1: number; recall_at_3: number; mrr: number }>;
+  escalation: Record<
+    string,
+    {
+      escalation_precision: number;
+      escalation_recall: number;
+      escalation_f1: number;
+      self_service_rate: number;
+      answered_from_right_article: number;
+      median_latency_ms: number;
+    }
+  >;
+  intent_errors: [string, string, string][];
+}
+
 export interface Health {
   status: string;
   company: string;
   provider: string;
   model: string | null;
   knowledge_base_chunks: number;
+  nlu: string;
+  retrieval: string;
 }
 
 export interface KbArticle {
@@ -133,6 +154,7 @@ export const api = {
   reply: (id: number, content: string, agent: string) =>
     post<Message>(`/api/tickets/${id}/reply`, { content, agent }),
   metrics: (days = 14) => request<Metrics>(`/api/metrics?days=${days}`),
+  modelQuality: () => request<ModelQuality>("/api/model-quality"),
   knowledgeBase: (q?: string) =>
     request<KbArticle[]>(`/api/knowledge-base${q ? `?q=${encodeURIComponent(q)}` : ""}`),
 };

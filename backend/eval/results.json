@@ -1,0 +1,104 @@
+{
+  "n_cases": 130,
+  "n_with_article": 92,
+  "intents": {
+    "Regex rules (baseline)": {
+      "accuracy": 0.5384615384615384,
+      "macro_f1": 0.5848513726880212
+    },
+    "ML: TF-IDF": {
+      "accuracy": 0.7307692307692307,
+      "macro_f1": 0.7378433030016739
+    },
+    "ML: embeddings": {
+      "accuracy": 0.9384615384615385,
+      "macro_f1": 0.9439873557990968
+    },
+    "ML: TF-IDF + embeddings": {
+      "accuracy": 0.9307692307692308,
+      "macro_f1": 0.9348830241574876
+    }
+  },
+  "retrieval": {
+    "BM25 (baseline)": {
+      "recall_at_1": 0.5108695652173914,
+      "recall_at_3": 0.6956521739130435,
+      "mrr": 0.592391304347826
+    },
+    "Dense embeddings": {
+      "recall_at_1": 0.6956521739130435,
+      "recall_at_3": 0.8586956521739131,
+      "mrr": 0.7735507246376813
+    },
+    "Hybrid RRF (BM25 + embeddings)": {
+      "recall_at_1": 0.6304347826086957,
+      "recall_at_3": 0.8369565217391305,
+      "mrr": 0.7246376811594203
+    },
+    "Embeddings + intent boost": {
+      "recall_at_1": 0.7391304347826086,
+      "recall_at_3": 0.8804347826086957,
+      "mrr": 0.8061594202898551
+    }
+  },
+  "escalation": {
+    "Baseline: regex rules + BM25": {
+      "escalation_precision": 0.47297297297297297,
+      "escalation_recall": 0.8974358974358975,
+      "escalation_f1": 0.6194690265486725,
+      "self_service_rate": 0.5714285714285714,
+      "answered_from_right_article": 0.4457831325301205,
+      "median_latency_ms": 0.1546254934510216
+    },
+    "Current: ML intents + embedding retrieval": {
+      "escalation_precision": 0.7647058823529411,
+      "escalation_recall": 1.0,
+      "escalation_f1": 0.8666666666666667,
+      "self_service_rate": 0.8681318681318682,
+      "answered_from_right_article": 0.7590361445783133,
+      "median_latency_ms": 11.47304199548671
+    }
+  },
+  "intent_errors": [
+    [
+      "If I order now, does it go out today?",
+      "shipping",
+      "order_status"
+    ],
+    [
+      "I took the tent camping once, can I still bring it back?",
+      "returns_refunds",
+      "product_info"
+    ],
+    [
+      "The jacket went on sale two days after I bought it",
+      "billing",
+      "product_info"
+    ],
+    [
+      "How do I see what's left on my gift card",
+      "billing",
+      "order_status"
+    ],
+    [
+      "How many points do I need for $5 off",
+      "account",
+      "billing"
+    ],
+    [
+      "Is there a membership with free shipping",
+      "account",
+      "shipping"
+    ],
+    [
+      "Is there an email I can write to",
+      "store_info",
+      "account"
+    ],
+    [
+      "Tell me about your company",
+      "store_info",
+      "complaint"
+    ]
+  ]
+}

@@ -11,6 +11,9 @@ dependencies = [
     "pydantic>=2.9",
     "pydantic-settings>=2.6",
     "anthropic>=2.0",
+    "fastembed>=0.9.1",
+    "scikit-learn>=1.9.1",
+    "numpy>=2.4.6",
 ]
 
 [dependency-groups]

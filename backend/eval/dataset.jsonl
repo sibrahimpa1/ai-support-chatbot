@@ -1,0 +1,130 @@
+{"text": "Hello! Hope you are having a nice day", "intent": "greeting", "article": null, "escalate": false}
+{"text": "hey hey", "intent": "greeting", "article": null, "escalate": false}
+{"text": "Good morning team", "intent": "greeting", "article": null, "escalate": false}
+{"text": "hi fern :)", "intent": "greeting", "article": null, "escalate": false}
+{"text": "Brilliant, that's exactly what I needed", "intent": "thanks", "article": null, "escalate": false}
+{"text": "thx a bunch", "intent": "thanks", "article": null, "escalate": false}
+{"text": "ok that sorts it, have a good one", "intent": "thanks", "article": null, "escalate": false}
+{"text": "many thanks for the quick help", "intent": "thanks", "article": null, "escalate": false}
+{"text": "Any idea when my parcel turns up?", "intent": "order_status", "article": "orders:Checking order status", "escalate": false}
+{"text": "Could you look up FW-10234 for me", "intent": "order_status", "article": "orders:Checking order status", "escalate": false}
+{"text": "I placed an order last Monday and still have no update", "intent": "order_status", "article": "orders:Checking order status", "escalate": false}
+{"text": "what stage is my purchase at right now", "intent": "order_status", "article": "orders:Checking order status", "escalate": false}
+{"text": "The courier link shows nothing yet, is that normal?", "intent": "order_status", "article": "shipping:Tracking a shipment", "escalate": false}
+{"text": "Where can I find the tracking code for my shipment", "intent": "order_status", "article": "shipping:Tracking a shipment", "escalate": false}
+{"text": "Has FW-10237 left the warehouse?", "intent": "order_status", "article": "orders:Checking order status", "escalate": false}
+{"text": "my package is stuck in transit for over a week", "intent": "order_status", "article": "shipping:Lost, late or damaged packages", "escalate": false}
+{"text": "is order FW-10236 delivered", "intent": "order_status", "article": "orders:Checking order status", "escalate": false}
+{"text": "When will my boots get here?", "intent": "order_status", "article": "orders:Checking order status", "escalate": false}
+{"text": "I'd like to call off the purchase I made ten minutes ago", "intent": "order_change", "article": "orders:Changing or cancelling an order", "escalate": false}
+{"text": "Is there a way to undo my order", "intent": "order_change", "article": "orders:Changing or cancelling an order", "escalate": false}
+{"text": "Oops, I typed my old street, can that be fixed?", "intent": "order_change", "article": "orders:Changing the shipping address", "escalate": false}
+{"text": "please send my order to my office instead of home", "intent": "order_change", "article": "orders:Changing the shipping address", "escalate": false}
+{"text": "Can I swap the medium for a large before it ships?", "intent": "order_change", "article": "orders:Changing or cancelling an order", "escalate": false}
+{"text": "I moved, how do I redirect a package that already shipped", "intent": "order_change", "article": "orders:Changing the shipping address", "escalate": false}
+{"text": "cancel FW-10235 please", "intent": "order_change", "article": "orders:Changing or cancelling an order", "escalate": false}
+{"text": "Can I still add socks to the order I placed", "intent": "order_change", "article": "orders:Changing or cancelling an order", "escalate": false}
+{"text": "What does it cost to send an order to me", "intent": "shipping", "article": "shipping:Shipping costs and free shipping", "escalate": false}
+{"text": "Is delivery free if I spend enough?", "intent": "shipping", "article": "shipping:Shipping costs and free shipping", "escalate": false}
+{"text": "How many days until standard delivery arrives", "intent": "shipping", "article": "shipping:Shipping options and delivery times", "escalate": false}
+{"text": "Do you send orders abroad, like to France?", "intent": "shipping", "article": "shipping:International shipping", "escalate": false}
+{"text": "Will I have to pay import duty in Canada", "intent": "shipping", "article": "shipping:International shipping", "escalate": false}
+{"text": "What's the fee for a canoe delivery", "intent": "shipping", "article": "shipping:Shipping costs and free shipping", "escalate": false}
+{"text": "Can I get it tomorrow if I pay extra?", "intent": "shipping", "article": "shipping:Shipping options and delivery times", "escalate": false}
+{"text": "If I order now, does it go out today?", "intent": "shipping", "article": "shipping:Shipping options and delivery times", "escalate": false}
+{"text": "Do you deliver to Melbourne", "intent": "shipping", "article": "shipping:International shipping", "escalate": false}
+{"text": "what is the fastest delivery you have", "intent": "shipping", "article": "shipping:Shipping options and delivery times", "escalate": false}
+{"text": "How much is postage under $75", "intent": "shipping", "article": "shipping:Shipping costs and free shipping", "escalate": false}
+{"text": "Do you deliver to Ireland and how long does it take", "intent": "shipping", "article": "shipping:International shipping", "escalate": false}
+{"text": "How do I get my money back for a jacket", "intent": "returns_refunds", "article": "returns:Refund timing", "escalate": false}
+{"text": "How many days do I have to send something back", "intent": "returns_refunds", "article": "returns:Return policy", "escalate": false}
+{"text": "I'm a rewards member, do I get longer to return?", "intent": "returns_refunds", "article": "returns:Return policy", "escalate": false}
+{"text": "What steps do I follow to return an item", "intent": "returns_refunds", "article": "returns:How to start a return", "escalate": false}
+{"text": "Do I pay for the return label", "intent": "returns_refunds", "article": "returns:How to start a return", "escalate": false}
+{"text": "My refund still isn't on my card after a week", "intent": "returns_refunds", "article": "returns:Refund timing", "escalate": false}
+{"text": "Can I trade these for a bigger size", "intent": "returns_refunds", "article": "returns:Exchanges", "escalate": false}
+{"text": "I took the tent camping once, can I still bring it back?", "intent": "returns_refunds", "article": "returns:Used or worn gear", "escalate": false}
+{"text": "Can I return final sale items", "intent": "returns_refunds", "article": "returns:Return policy", "escalate": false}
+{"text": "These pants don't fit, what are my options", "intent": "returns_refunds", "article": "returns:Exchanges", "escalate": false}
+{"text": "Will I get cash or store credit for a return", "intent": "returns_refunds", "article": "returns:Refund timing", "escalate": false}
+{"text": "Do I need to wait for my return to arrive before you send the new size", "intent": "returns_refunds", "article": "returns:Exchanges", "escalate": false}
+{"text": "Is there a trade-in program for old gear", "intent": "returns_refunds", "article": "returns:Used or worn gear", "escalate": false}
+{"text": "where do I drop off a return package", "intent": "returns_refunds", "article": "returns:How to start a return", "escalate": false}
+{"text": "Which cards can I use at checkout", "intent": "billing", "article": "billing:Accepted payment methods", "escalate": false}
+{"text": "Can I split my payment over a few months", "intent": "billing", "article": "billing:Accepted payment methods", "escalate": false}
+{"text": "Is Google Pay supported", "intent": "billing", "article": "billing:Accepted payment methods", "escalate": false}
+{"text": "At what point do you take the money from my account", "intent": "billing", "article": "billing:When you are charged", "escalate": false}
+{"text": "My coupon gets rejected at checkout", "intent": "billing", "article": "billing:Promo codes and discounts", "escalate": false}
+{"text": "Can I stack two discount codes", "intent": "billing", "article": "billing:Promo codes and discounts", "escalate": false}
+{"text": "The jacket went on sale two days after I bought it", "intent": "billing", "article": "billing:Price match and price adjustments", "escalate": false}
+{"text": "Will you beat a competitor's price", "intent": "billing", "article": "billing:Price match and price adjustments", "escalate": false}
+{"text": "Do Fernway gift cards ever expire", "intent": "billing", "article": "billing:Gift cards", "escalate": false}
+{"text": "How do I see what's left on my gift card", "intent": "billing", "article": "billing:Gift cards", "escalate": false}
+{"text": "I see two charges for one order and the second hasn't gone away after a week", "intent": "billing", "article": "billing:Double charges and billing errors", "escalate": true}
+{"text": "You billed me twice!", "intent": "billing", "article": "billing:Double charges and billing errors", "escalate": true}
+{"text": "Why do I see several charges for a single order", "intent": "billing", "article": "billing:When you are charged", "escalate": false}
+{"text": "I can't remember my login", "intent": "account", "article": "account:Resetting your password", "escalate": false}
+{"text": "the reset link never showed up in my inbox", "intent": "account", "article": "account:Resetting your password", "escalate": false}
+{"text": "How do I change the email on my profile", "intent": "account", "article": "account:Updating account details", "escalate": false}
+{"text": "Please erase all my personal data", "intent": "account", "article": "account:Deleting your account", "escalate": false}
+{"text": "How do loyalty points work here", "intent": "account", "article": "account:Fernway Rewards program", "escalate": false}
+{"text": "How many points do I need for $5 off", "intent": "account", "article": "account:Fernway Rewards program", "escalate": false}
+{"text": "Stop sending me marketing emails", "intent": "account", "article": "account:Newsletter and email preferences", "escalate": false}
+{"text": "Is there a membership with free shipping", "intent": "account", "article": "account:Fernway Rewards program", "escalate": false}
+{"text": "Where do I update my saved card", "intent": "account", "article": "account:Updating account details", "escalate": false}
+{"text": "I want to close my profile permanently", "intent": "account", "article": "account:Deleting your account", "escalate": false}
+{"text": "Should I order my usual shoe size in your hiking boots?", "intent": "product_info", "article": "products:Sizing help", "escalate": false}
+{"text": "I'm between sizes and want to layer underneath", "intent": "product_info", "article": "products:Sizing help", "escalate": false}
+{"text": "What exactly does the lifetime guarantee include", "intent": "product_info", "article": "products:Fernway lifetime warranty", "escalate": false}
+{"text": "How should I wash my tent", "intent": "product_info", "article": "products:Tent care", "escalate": false}
+{"text": "My tent smells musty, how do I store it properly", "intent": "product_info", "article": "products:Tent care", "escalate": false}
+{"text": "Do you fix torn backpacks", "intent": "product_info", "article": "products:Repairs", "escalate": false}
+{"text": "How much does it cost to repair a jacket", "intent": "product_info", "article": "products:Repairs", "escalate": false}
+{"text": "The kayak I want is sold out, will it come back", "intent": "product_info", "article": "products:Product availability and restocks", "escalate": false}
+{"text": "Can you tell me when the backpack is available again", "intent": "product_info", "article": "products:Product availability and restocks", "escalate": false}
+{"text": "Is accidental damage covered by the warranty", "intent": "product_info", "article": "products:Fernway lifetime warranty", "escalate": false}
+{"text": "The seam on my jacket came apart after two months, can I claim warranty?", "intent": "product_info", "article": "products:Fernway lifetime warranty", "escalate": true}
+{"text": "My backpack zipper ripped off, I want it replaced under warranty", "intent": "product_info", "article": "products:Fernway lifetime warranty", "escalate": true}
+{"text": "What time do you open on Saturdays", "intent": "store_info", "article": "company:Store location", "escalate": false}
+{"text": "Where's your shop in Denver", "intent": "store_info", "article": "company:Store location", "escalate": false}
+{"text": "When can I reach your support staff", "intent": "store_info", "article": "company:Support hours and contact options", "escalate": false}
+{"text": "What's your phone number", "intent": "store_info", "article": "company:Support hours and contact options", "escalate": false}
+{"text": "Can I collect my order from the shop", "intent": "store_info", "article": "company:Store location", "escalate": false}
+{"text": "Is there an email I can write to", "intent": "store_info", "article": "company:Support hours and contact options", "escalate": false}
+{"text": "Tell me about your company", "intent": "store_info", "article": "company:About Fernway Outdoor", "escalate": false}
+{"text": "Are your agents available on weekends", "intent": "store_info", "article": "company:Support hours and contact options", "escalate": false}
+{"text": "My box showed up crushed and the stove inside is dented", "intent": "order_status", "article": "shipping:Lost, late or damaged packages", "escalate": true}
+{"text": "The package arrived damaged", "intent": "order_status", "article": "shipping:Lost, late or damaged packages", "escalate": true}
+{"text": "Half of my order is missing from the box", "intent": "order_status", "article": "orders:Missing items", "escalate": true}
+{"text": "one item from my order never arrived", "intent": "order_status", "article": "orders:Missing items", "escalate": true}
+{"text": "Tracking says delivered but there is nothing at my door, I think it was stolen", "intent": "order_status", "article": "shipping:Lost, late or damaged packages", "escalate": true}
+{"text": "Could I speak with an actual staff member", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "I'd prefer a person over a chatbot", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "pls get me a live rep", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "Transfer me to a human being", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "Can a support agent take over this chat", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "I need to talk with somebody from your team", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "Is anyone real there?", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "I want a callback from a person", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "Not a bot please, a human", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "Get me a representative now", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "This has been a horrible experience from start to finish", "intent": "complaint", "article": null, "escalate": true}
+{"text": "I'm fed up, nobody is helping me", "intent": "complaint", "article": null, "escalate": true}
+{"text": "I want to escalate this to your manager", "intent": "complaint", "article": null, "escalate": true}
+{"text": "I'll be filing a chargeback with my bank", "intent": "complaint", "article": null, "escalate": true}
+{"text": "Absolutely pathetic service", "intent": "complaint", "article": null, "escalate": true}
+{"text": "I'm livid, this is the third time", "intent": "complaint", "article": null, "escalate": true}
+{"text": "You people have wasted hours of my time", "intent": "complaint", "article": null, "escalate": true}
+{"text": "I am very unhappy with how this was handled", "intent": "complaint", "article": null, "escalate": true}
+{"text": "Your support is a disgrace", "intent": "complaint", "article": null, "escalate": true}
+{"text": "This is completely unacceptable!!", "intent": "complaint", "article": null, "escalate": true}
+{"text": "Can you write a poem about mountains", "intent": "other", "article": null, "escalate": true}
+{"text": "What's the capital of Australia", "intent": "other", "article": null, "escalate": true}
+{"text": "Who will win the election", "intent": "other", "article": null, "escalate": true}
+{"text": "Give me a recipe for pancakes", "intent": "other", "article": null, "escalate": true}
+{"text": "Can you help me with my taxes", "intent": "other", "article": null, "escalate": true}
+{"text": "Which stock should I buy", "intent": "other", "article": null, "escalate": true}
+{"text": "What's a good movie to watch tonight", "intent": "other", "article": null, "escalate": true}
+{"text": "Do you sell car tires", "intent": "other", "article": null, "escalate": true}
+{"text": "Explain quantum physics", "intent": "other", "article": null, "escalate": true}
+{"text": "Can you book me a hotel in Denver", "intent": "other", "article": null, "escalate": true}

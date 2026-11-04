@@ -6,11 +6,15 @@ import json
 import logging
 import time
 from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 from app.config import Settings
-from app.intents import INTENTS, NLUResult, analyze
-from app.knowledge_base import Retriever, load_chunks, tokenize
+from app.embeddings import load_embedder
+from app.intent_model import ActionDetector, IntentClassifier, load_examples
+from app.intents import INTENTS, NLUResult, _analyze_rules, analyze
+from app.knowledge_base import HybridRetriever, Retriever, load_chunks, tokenize
 from app.providers import GenerationRequest, GenerationResult, LLMProvider
 from app.providers.anthropic_provider import ProviderError
 from app.providers.mock import MockProvider
@@ -62,13 +66,52 @@ def decide_escalation(
     return EscalationDecision(False)
 
 
+@lru_cache(maxsize=8)
+def build_nlp(kb_dir: Path, train_file: Path, action_file: Path, nlu_mode: str, features: str,
+              retrieval_mode: str, embedding_model: str, cache_dir: Path,
+              bm25_weight: float, action_threshold: float):
+    """Build (and cache) the retriever and intent classifier for a configuration.
+
+    Embedding the knowledge base and training the classifier takes a second or
+    two, so engines with the same settings (tests, eval runs) share one copy.
+    """
+    needs_embeddings = retrieval_mode == "hybrid" or (nlu_mode == "ml" and features != "tfidf")
+    embedder = load_embedder(embedding_model, str(cache_dir)) if needs_embeddings else None
+    chunks = load_chunks(kb_dir)
+    retriever = (
+        HybridRetriever(chunks, embedder, bm25_weight=bm25_weight)
+        if retrieval_mode == "hybrid" and embedder
+        else Retriever(chunks)
+    )
+    classifier = detector = None
+    if nlu_mode == "ml":
+        examples = load_examples(train_file)
+        classifier = IntentClassifier(examples, embedder, features)
+        if embedder:
+            negatives = [e["text"] for e in examples if not _analyze_rules(e["text"]).needs_action]
+            positives = [e["text"] for e in load_examples(action_file)]
+            detector = ActionDetector(positives, negatives, embedder, action_threshold)
+    return retriever, classifier, detector
+
+
 class SupportEngine:
     def __init__(self, settings: Settings, store: Store, provider: LLMProvider):
         self.settings = settings
         self.store = store
         self.provider = provider
-        self.fallback = MockProvider()
-        self.retriever = Retriever(load_chunks(settings.knowledge_base_dir))
+        self.fallback = MockProvider(settings.confidence_intent_weight)
+        self.retriever, self.classifier, self.action_detector = build_nlp(
+            settings.knowledge_base_dir,
+            settings.nlu_train_file,
+            settings.needs_action_file,
+            settings.nlu_mode,
+            settings.intent_features,
+            settings.retrieval_mode,
+            settings.embedding_model,
+            settings.model_cache_dir,
+            settings.bm25_weight,
+            settings.action_threshold,
+        )
         self.orders: dict[str, dict[str, Any]] = (
             json.loads(settings.orders_file.read_text()) if settings.orders_file.exists() else {}
         )
@@ -95,7 +138,7 @@ class SupportEngine:
             return self._response(conv_id, None, user_msg, escalated=True, provider="human")
 
         started = time.perf_counter()
-        nlu = analyze(text)
+        nlu = analyze(text, self.classifier, self.action_detector)
         context = self._retrieve(text, history, INTENT_SOURCES.get(nlu.intent, ()))
         orders = {oid: self.orders[oid] for oid in nlu.order_ids if oid in self.orders}
         request = GenerationRequest(
@@ -191,6 +234,9 @@ class SupportEngine:
         results = self.retriever.search(query, self.settings.retrieval_top_k, boost)
         if not results:
             return []
+        if isinstance(self.retriever, HybridRetriever):
+            # Keep the top hit plus any other section that is clearly on-topic.
+            return [r for i, r in enumerate(results) if i == 0 or (r.similarity or 0) >= 0.62]
         best = results[0].score
         return [r for r in results if r.score >= best * 0.35]
 

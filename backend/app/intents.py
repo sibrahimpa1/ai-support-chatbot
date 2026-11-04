@@ -11,6 +11,10 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.intent_model import ActionDetector, IntentClassifier
 
 INTENTS: dict[str, str] = {
     "greeting": "Greeting or small talk",
@@ -115,6 +119,7 @@ class NLUResult:
     order_ids: list[str] = field(default_factory=list)
     needs_action: bool = False
     scores: dict[str, float] = field(default_factory=dict)
+    source: str = "rules"  # "rules" or "ml": which component chose the intent
 
     @property
     def wants_human(self) -> bool:
@@ -125,7 +130,25 @@ def extract_order_ids(text: str) -> list[str]:
     return [f"FW-{m}" for m in _ORDER_ID.findall(text)]
 
 
-def analyze(text: str) -> NLUResult:
+def analyze(
+    text: str,
+    classifier: "IntentClassifier | None" = None,
+    action_detector: "ActionDetector | None" = None,
+) -> NLUResult:
+    """Rules always compute the safety signals (sentiment, explicit human request,
+    needs-manual-action). With trained models, they pick the intent and add a
+    learned needs-manual-action signal on top of the keyword one."""
+    result = _analyze_rules(text)
+    if action_detector is not None and not result.needs_action:
+        result.needs_action = action_detector(text)
+    if classifier is not None:
+        result.intent, result.confidence, _ = classifier.predict(text)
+        result.confidence = round(result.confidence, 3)
+        result.source = "ml"
+    return result
+
+
+def _analyze_rules(text: str) -> NLUResult:
     lowered = text.lower().strip()
     scores: dict[str, float] = {}
     for intent, rules in _RULES.items():

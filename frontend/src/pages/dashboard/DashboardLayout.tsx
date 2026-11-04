@@ -1,4 +1,4 @@
-import { BookOpen, Inbox, LayoutDashboard, MessagesSquare, Mountain, Store } from "lucide-react";
+import { BookOpen, FlaskConical, Inbox, LayoutDashboard, MessagesSquare, Mountain, Store } from "lucide-react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { api } from "../../api";
 import { usePolling } from "../../hooks";
@@ -8,6 +8,7 @@ const NAV = [
   { to: "/dashboard/inbox", label: "Escalations", icon: Inbox },
   { to: "/dashboard/conversations", label: "Conversations", icon: MessagesSquare },
   { to: "/dashboard/knowledge-base", label: "Knowledge base", icon: BookOpen },
+  { to: "/dashboard/model-quality", label: "Model quality", icon: FlaskConical },
 ];
 
 export default function DashboardLayout() {
@@ -55,6 +56,8 @@ export default function DashboardLayout() {
               </div>
               <p className="mt-1 text-brand-200">
                 {live ? health.model : "Extractive answers, no API key"} · {health.knowledge_base_chunks} KB sections
+                <br />
+                NLU: {health.nlu} · search: {health.retrieval}
               </p>
             </div>
           )}

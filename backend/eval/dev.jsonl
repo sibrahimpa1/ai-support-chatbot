@@ -1,0 +1,46 @@
+{"text": "heya", "intent": "greeting", "article": null, "escalate": false}
+{"text": "great stuff, thanks again", "intent": "thanks", "article": null, "escalate": false}
+{"text": "can you see where order FW-10235 is", "intent": "order_status", "article": "orders:Checking order status", "escalate": false}
+{"text": "my tracking hasn't moved in days", "intent": "order_status", "article": "shipping:Lost, late or damaged packages", "escalate": false}
+{"text": "how do I find out where my delivery is", "intent": "order_status", "article": "shipping:Tracking a shipment", "escalate": false}
+{"text": "I want to back out of my order from this morning", "intent": "order_change", "article": "orders:Changing or cancelling an order", "escalate": false}
+{"text": "can the parcel go to a different address", "intent": "order_change", "article": "orders:Changing the shipping address", "escalate": false}
+{"text": "I need to change the colour I picked", "intent": "order_change", "article": "orders:Changing or cancelling an order", "escalate": false}
+{"text": "what do you charge for delivery", "intent": "shipping", "article": "shipping:Shipping costs and free shipping", "escalate": false}
+{"text": "do you post to the netherlands", "intent": "shipping", "article": "shipping:International shipping", "escalate": false}
+{"text": "how quick is your quickest option", "intent": "shipping", "article": "shipping:Shipping options and delivery times", "escalate": false}
+{"text": "are there extra taxes when shipping to the UK", "intent": "shipping", "article": "shipping:International shipping", "escalate": false}
+{"text": "how long until I'm reimbursed", "intent": "returns_refunds", "article": "returns:Refund timing", "escalate": false}
+{"text": "is there a deadline for sending items back", "intent": "returns_refunds", "article": "returns:Return policy", "escalate": false}
+{"text": "I want the same boots in another size", "intent": "returns_refunds", "article": "returns:Exchanges", "escalate": false}
+{"text": "can I bring back a sleeping bag I used", "intent": "returns_refunds", "article": "returns:Used or worn gear", "escalate": false}
+{"text": "how do I get a prepaid label", "intent": "returns_refunds", "article": "returns:How to start a return", "escalate": false}
+{"text": "do you take amex", "intent": "billing", "article": "billing:Accepted payment methods", "escalate": false}
+{"text": "the voucher code says invalid", "intent": "billing", "article": "billing:Promo codes and discounts", "escalate": false}
+{"text": "price went down right after my purchase, can I get the difference", "intent": "billing", "article": "billing:Price match and price adjustments", "escalate": false}
+{"text": "my card shows the same purchase two times and it hasn't dropped off", "intent": "billing", "article": "billing:Double charges and billing errors", "escalate": true}
+{"text": "how much is left on my gift voucher", "intent": "billing", "article": "billing:Gift cards", "escalate": false}
+{"text": "locked out, forgot my password", "intent": "account", "article": "account:Resetting your password", "escalate": false}
+{"text": "how do I earn reward points", "intent": "account", "article": "account:Fernway Rewards program", "escalate": false}
+{"text": "remove me from the mailing list", "intent": "account", "article": "account:Newsletter and email preferences", "escalate": false}
+{"text": "delete everything you have about me", "intent": "account", "article": "account:Deleting your account", "escalate": false}
+{"text": "do your trail shoes fit narrow", "intent": "product_info", "article": "products:Sizing help", "escalate": false}
+{"text": "how do I keep my tent from getting mouldy", "intent": "product_info", "article": "products:Tent care", "escalate": false}
+{"text": "can you mend a ripped tent", "intent": "product_info", "article": "products:Repairs", "escalate": false}
+{"text": "when will the sold out jacket be restocked", "intent": "product_info", "article": "products:Product availability and restocks", "escalate": false}
+{"text": "the strap on my pack tore after a month, I want a warranty replacement", "intent": "product_info", "article": "products:Fernway lifetime warranty", "escalate": true}
+{"text": "what are the opening times of your store", "intent": "store_info", "article": "company:Store location", "escalate": false}
+{"text": "how do I get in touch with support", "intent": "store_info", "article": "company:Support hours and contact options", "escalate": false}
+{"text": "does someone answer the phone on saturday", "intent": "store_info", "article": "company:Support hours and contact options", "escalate": false}
+{"text": "the parcel was soaked and the jacket inside is ruined", "intent": "order_status", "article": "shipping:Lost, late or damaged packages", "escalate": true}
+{"text": "I only got two of the three things I ordered", "intent": "order_status", "article": "orders:Missing items", "escalate": true}
+{"text": "can I have a person look at this", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "hand me over to your staff please", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "I don't want to talk to a machine", "intent": "human_handoff", "article": null, "escalate": true}
+{"text": "this is beyond frustrating", "intent": "complaint", "article": null, "escalate": true}
+{"text": "I've had enough of this nonsense", "intent": "complaint", "article": null, "escalate": true}
+{"text": "I want to lodge a formal complaint", "intent": "complaint", "article": null, "escalate": true}
+{"text": "what's the best credit card to get", "intent": "other", "article": null, "escalate": true}
+{"text": "can you plan my vacation", "intent": "other", "article": null, "escalate": true}
+{"text": "write some python code for me", "intent": "other", "article": null, "escalate": true}
+{"text": "what's the score of the match", "intent": "other", "article": null, "escalate": true}

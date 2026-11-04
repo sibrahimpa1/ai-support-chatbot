@@ -13,4 +13,4 @@ We ship to Canada, the United Kingdom, the European Union and Australia. Interna
 As soon as your order ships you receive an email with a tracking number. You can also see tracking details under Account > Orders. Tracking can take up to 24 hours to show the first scan after the label is created.
 
 ## Lost, late or damaged packages
-If your tracking has not updated for 5 business days, or the package arrived damaged, contact support with your order number and photos of the damage. We will send a free replacement or issue a full refund. You do not need to return a damaged item.
+If your tracking has not updated for 5 business days, or the package or an item inside arrived damaged, broken or torn, contact support with your order number and photos of the damage. We will send a free replacement or issue a full refund. You do not need to return a damaged item. Damage on arrival is always covered and is not a repair or warranty case.

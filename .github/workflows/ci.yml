@@ -14,8 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
+      - uses: actions/cache@v4
+        with:
+          path: backend/.cache/models
+          key: embedding-model-bge-small-en-v1.5
       - run: uv sync --python 3.12
       - run: uv run pytest -q
+      - name: NLP quality gate (held-out eval set)
+        run: uv run python -m eval.run_eval --check
 
   frontend:
     runs-on: ubuntu-latest

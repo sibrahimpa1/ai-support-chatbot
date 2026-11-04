@@ -40,6 +40,10 @@ def format_order(order_id: str, order: dict) -> str:
 class MockProvider:
     name = "mock"
 
+    def __init__(self, intent_weight: float = 0.5):
+        # How much the intent probability (vs. retrieval relevance) drives confidence.
+        self.intent_weight = intent_weight
+
     def generate(self, request: GenerationRequest) -> GenerationResult:
         nlu = request.nlu
 
@@ -73,7 +77,7 @@ class MockProvider:
                 confidence=0.8,
             )
 
-        if not request.context:
+        if not request.context or (nlu.intent == "other" and nlu.source == "ml"):
             return GenerationResult(
                 answer="I'm not sure I have the right answer for that.",
                 intent=nlu.intent,
@@ -95,7 +99,12 @@ class MockProvider:
 
         coverage = len(query_terms & set(tokenize(best.chunk.title + " " + best.chunk.text)))
         coverage /= max(len(query_terms), 1)
-        confidence = round(0.5 * nlu.confidence + 0.5 * coverage, 3)
+        relevance = coverage
+        if best.similarity is not None:
+            # bge cosine: ~0.55 is unrelated, ~0.8 is a close paraphrase.
+            relevance = max(coverage, min(1.0, max(0.0, (best.similarity - 0.55) / 0.25)))
+        w = self.intent_weight
+        confidence = round(w * nlu.confidence + (1 - w) * relevance, 3)
         return GenerationResult(
             answer=answer,
             intent=nlu.intent,

@@ -13,6 +13,8 @@ WORKDIR /app/backend
 COPY backend/pyproject.toml backend/uv.lock ./
 RUN uv sync --frozen --no-dev
 COPY backend/ ./
+# Bake the embedding model into the image so containers start offline.
+RUN .venv/bin/python -c "from app.config import Settings; from app.embeddings import load_embedder; s = Settings(); assert load_embedder(s.embedding_model, str(s.model_cache_dir))"
 COPY --from=web /app/frontend/dist /app/frontend/dist
 ENV PATH="/app/backend/.venv/bin:$PATH"
 EXPOSE 8000

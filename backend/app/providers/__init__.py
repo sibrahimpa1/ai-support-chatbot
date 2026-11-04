@@ -22,5 +22,5 @@ def build_provider(settings: Settings) -> LLMProvider:
             settings.anthropic_api_key, settings.anthropic_model, settings.anthropic_effort
         )
     if choice == "mock":
-        return MockProvider()
+        return MockProvider(settings.confidence_intent_weight)
     raise ValueError(f"Unknown LLM_PROVIDER: {settings.llm_provider}")

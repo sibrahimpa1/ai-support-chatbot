@@ -1,0 +1,268 @@
+{"text": "hi", "intent": "greeting"}
+{"text": "hello", "intent": "greeting"}
+{"text": "hey there", "intent": "greeting"}
+{"text": "good morning", "intent": "greeting"}
+{"text": "good afternoon", "intent": "greeting"}
+{"text": "hello, anyone there?", "intent": "greeting"}
+{"text": "hi team", "intent": "greeting"}
+{"text": "hey", "intent": "greeting"}
+{"text": "good evening", "intent": "greeting"}
+{"text": "hiya", "intent": "greeting"}
+{"text": "greetings", "intent": "greeting"}
+{"text": "hello hello", "intent": "greeting"}
+{"text": "morning!", "intent": "greeting"}
+{"text": "hi, I have a question", "intent": "greeting"}
+{"text": "hey, quick question", "intent": "greeting"}
+{"text": "yo", "intent": "greeting"}
+{"text": "hi there, hope you're well", "intent": "greeting"}
+{"text": "hello support", "intent": "greeting"}
+{"text": "hey fern", "intent": "greeting"}
+{"text": "howdy", "intent": "greeting"}
+{"text": "where is my order", "intent": "order_status"}
+{"text": "has my package shipped yet", "intent": "order_status"}
+{"text": "track my order FW-10235", "intent": "order_status"}
+{"text": "what's the status of my order", "intent": "order_status"}
+{"text": "my order hasn't arrived", "intent": "order_status"}
+{"text": "when will my package be delivered", "intent": "order_status"}
+{"text": "can you check order FW-10236", "intent": "order_status"}
+{"text": "is my parcel on the way", "intent": "order_status"}
+{"text": "I ordered a week ago and nothing came", "intent": "order_status"}
+{"text": "order status please", "intent": "order_status"}
+{"text": "where's my stuff", "intent": "order_status"}
+{"text": "tracking number for my order", "intent": "order_status"}
+{"text": "my delivery is late", "intent": "order_status"}
+{"text": "did my order go out", "intent": "order_status"}
+{"text": "when does my tent arrive", "intent": "order_status"}
+{"text": "it says delivered but I don't have it", "intent": "order_status"}
+{"text": "how far away is my package", "intent": "order_status"}
+{"text": "estimated delivery date for my order", "intent": "order_status"}
+{"text": "is FW-10238 still coming", "intent": "order_status"}
+{"text": "I haven't received a shipping email", "intent": "order_status"}
+{"text": "check on my purchase", "intent": "order_status"}
+{"text": "status of order number FW-10237", "intent": "order_status"}
+{"text": "cancel my order", "intent": "order_change"}
+{"text": "I need to cancel the order I just placed", "intent": "order_change"}
+{"text": "can I change my order", "intent": "order_change"}
+{"text": "add an item to my order", "intent": "order_change"}
+{"text": "change the size on my order", "intent": "order_change"}
+{"text": "update my shipping address", "intent": "order_change"}
+{"text": "I put the wrong address", "intent": "order_change"}
+{"text": "can I edit my order before it ships", "intent": "order_change"}
+{"text": "remove something from my order", "intent": "order_change"}
+{"text": "please cancel FW-10235", "intent": "order_change"}
+{"text": "I ordered the wrong color, can I change it", "intent": "order_change"}
+{"text": "switch my delivery address", "intent": "order_change"}
+{"text": "change my order to express", "intent": "order_change"}
+{"text": "I want to modify my purchase", "intent": "order_change"}
+{"text": "stop my order from shipping", "intent": "order_change"}
+{"text": "is it too late to cancel", "intent": "order_change"}
+{"text": "fix the address on my order", "intent": "order_change"}
+{"text": "I accidentally ordered twice, cancel one", "intent": "order_change"}
+{"text": "how much is shipping", "intent": "shipping"}
+{"text": "do you offer free shipping", "intent": "shipping"}
+{"text": "how long does delivery take", "intent": "shipping"}
+{"text": "do you ship internationally", "intent": "shipping"}
+{"text": "do you deliver to the UK", "intent": "shipping"}
+{"text": "express shipping cost", "intent": "shipping"}
+{"text": "how fast can I get it", "intent": "shipping"}
+{"text": "what carriers do you use", "intent": "shipping"}
+{"text": "do you ship to Australia", "intent": "shipping"}
+{"text": "shipping times to Europe", "intent": "shipping"}
+{"text": "is there next day delivery", "intent": "shipping"}
+{"text": "who pays customs fees", "intent": "shipping"}
+{"text": "freight cost for a kayak", "intent": "shipping"}
+{"text": "minimum order for free delivery", "intent": "shipping"}
+{"text": "do you ship on weekends", "intent": "shipping"}
+{"text": "same day dispatch?", "intent": "shipping"}
+{"text": "how much to send to Germany", "intent": "shipping"}
+{"text": "can I get it by Friday", "intent": "shipping"}
+{"text": "delivery options", "intent": "shipping"}
+{"text": "what's the cutoff time for shipping today", "intent": "shipping"}
+{"text": "how do I return something", "intent": "returns_refunds"}
+{"text": "I want a refund", "intent": "returns_refunds"}
+{"text": "what is your return policy", "intent": "returns_refunds"}
+{"text": "can I exchange for a different size", "intent": "returns_refunds"}
+{"text": "how long do I have to return", "intent": "returns_refunds"}
+{"text": "where is my refund", "intent": "returns_refunds"}
+{"text": "return label please", "intent": "returns_refunds"}
+{"text": "send back a jacket", "intent": "returns_refunds"}
+{"text": "refund hasn't shown up", "intent": "returns_refunds"}
+{"text": "exchange boots for a bigger size", "intent": "returns_refunds"}
+{"text": "do you charge for returns", "intent": "returns_refunds"}
+{"text": "can I return a sale item", "intent": "returns_refunds"}
+{"text": "return window for members", "intent": "returns_refunds"}
+{"text": "I don't like it, can I return it", "intent": "returns_refunds"}
+{"text": "how long do refunds take", "intent": "returns_refunds"}
+{"text": "return used gear", "intent": "returns_refunds"}
+{"text": "get store credit instead", "intent": "returns_refunds"}
+{"text": "how do I start an exchange", "intent": "returns_refunds"}
+{"text": "is return shipping free", "intent": "returns_refunds"}
+{"text": "money back for an item I didn't want", "intent": "returns_refunds"}
+{"text": "I'd like to send this back", "intent": "returns_refunds"}
+{"text": "it doesn't fit, what now", "intent": "returns_refunds"}
+{"text": "what payment methods do you accept", "intent": "billing"}
+{"text": "can I pay with paypal", "intent": "billing"}
+{"text": "my promo code doesn't work", "intent": "billing"}
+{"text": "discount code not applying", "intent": "billing"}
+{"text": "do you do price matching", "intent": "billing"}
+{"text": "when is my card charged", "intent": "billing"}
+{"text": "can I use a gift card", "intent": "billing"}
+{"text": "check gift card balance", "intent": "billing"}
+{"text": "pay in installments", "intent": "billing"}
+{"text": "do you take apple pay", "intent": "billing"}
+{"text": "I was charged twice", "intent": "billing"}
+{"text": "there's an extra charge on my card", "intent": "billing"}
+{"text": "price dropped after I bought it", "intent": "billing"}
+{"text": "can I combine coupons", "intent": "billing"}
+{"text": "is klarna available", "intent": "billing"}
+{"text": "billing question", "intent": "billing"}
+{"text": "why is there a pending charge", "intent": "billing"}
+{"text": "use two promo codes", "intent": "billing"}
+{"text": "invoice for my purchase", "intent": "billing"}
+{"text": "do gift cards expire", "intent": "billing"}
+{"text": "reset my password", "intent": "account"}
+{"text": "I can't log in", "intent": "account"}
+{"text": "forgot password", "intent": "account"}
+{"text": "change my email address", "intent": "account"}
+{"text": "update my account details", "intent": "account"}
+{"text": "delete my account", "intent": "account"}
+{"text": "how do I join rewards", "intent": "account"}
+{"text": "how many points do I have", "intent": "account"}
+{"text": "unsubscribe from emails", "intent": "account"}
+{"text": "stop the newsletter", "intent": "account"}
+{"text": "change saved address", "intent": "account"}
+{"text": "remove my credit card from my account", "intent": "account"}
+{"text": "sign in problems", "intent": "account"}
+{"text": "password reset email didn't arrive", "intent": "account"}
+{"text": "how do rewards points work", "intent": "account"}
+{"text": "close my account", "intent": "account"}
+{"text": "update my phone number", "intent": "account"}
+{"text": "change notification settings", "intent": "account"}
+{"text": "is the rewards program free", "intent": "account"}
+{"text": "my account is locked", "intent": "account"}
+{"text": "do the boots run small", "intent": "product_info"}
+{"text": "what size should I get", "intent": "product_info"}
+{"text": "is the tent waterproof", "intent": "product_info"}
+{"text": "warranty on backpacks", "intent": "product_info"}
+{"text": "how do I clean my tent", "intent": "product_info"}
+{"text": "can you repair my jacket", "intent": "product_info"}
+{"text": "when will the kayak be back in stock", "intent": "product_info"}
+{"text": "is this item in stock", "intent": "product_info"}
+{"text": "sizing for the rain jacket", "intent": "product_info"}
+{"text": "lifetime warranty details", "intent": "product_info"}
+{"text": "how heavy is the ridgeline tent", "intent": "product_info"}
+{"text": "tent care tips", "intent": "product_info"}
+{"text": "my zipper broke, is that covered", "intent": "product_info"}
+{"text": "repair cost for a backpack", "intent": "product_info"}
+{"text": "notify me when restocked", "intent": "product_info"}
+{"text": "should I size up for layering", "intent": "product_info"}
+{"text": "what does the warranty cover", "intent": "product_info"}
+{"text": "how long do repairs take", "intent": "product_info"}
+{"text": "is the jacket true to size", "intent": "product_info"}
+{"text": "product care instructions", "intent": "product_info"}
+{"text": "where is your store", "intent": "store_info"}
+{"text": "what are your opening hours", "intent": "store_info"}
+{"text": "store hours today", "intent": "store_info"}
+{"text": "phone number for support", "intent": "store_info"}
+{"text": "how do I contact you", "intent": "store_info"}
+{"text": "support hours", "intent": "store_info"}
+{"text": "can I pick up in store", "intent": "store_info"}
+{"text": "email address for help", "intent": "store_info"}
+{"text": "are you open on sunday", "intent": "store_info"}
+{"text": "where are you located", "intent": "store_info"}
+{"text": "when is customer service available", "intent": "store_info"}
+{"text": "in store pickup time", "intent": "store_info"}
+{"text": "address of the denver shop", "intent": "store_info"}
+{"text": "is there a physical store", "intent": "store_info"}
+{"text": "can I call someone", "intent": "store_info"}
+{"text": "what time does support close", "intent": "store_info"}
+{"text": "do you have a shop in Denver", "intent": "store_info"}
+{"text": "contact details", "intent": "store_info"}
+{"text": "talk to a human", "intent": "human_handoff"}
+{"text": "I want to speak to a person", "intent": "human_handoff"}
+{"text": "connect me with an agent", "intent": "human_handoff"}
+{"text": "real person please", "intent": "human_handoff"}
+{"text": "can I chat with someone", "intent": "human_handoff"}
+{"text": "get me a representative", "intent": "human_handoff"}
+{"text": "I need a human", "intent": "human_handoff"}
+{"text": "transfer me to support staff", "intent": "human_handoff"}
+{"text": "is there a live agent", "intent": "human_handoff"}
+{"text": "let me talk to someone real", "intent": "human_handoff"}
+{"text": "agent please", "intent": "human_handoff"}
+{"text": "speak with customer service rep", "intent": "human_handoff"}
+{"text": "I don't want a bot", "intent": "human_handoff"}
+{"text": "human support", "intent": "human_handoff"}
+{"text": "can someone call me", "intent": "human_handoff"}
+{"text": "put me through to a person", "intent": "human_handoff"}
+{"text": "operator", "intent": "human_handoff"}
+{"text": "I'd rather talk to a real human", "intent": "human_handoff"}
+{"text": "this is unacceptable", "intent": "complaint"}
+{"text": "worst service ever", "intent": "complaint"}
+{"text": "I'm really angry", "intent": "complaint"}
+{"text": "I want to file a complaint", "intent": "complaint"}
+{"text": "terrible experience", "intent": "complaint"}
+{"text": "I'm so frustrated with you", "intent": "complaint"}
+{"text": "this is ridiculous", "intent": "complaint"}
+{"text": "let me speak to a manager", "intent": "complaint"}
+{"text": "I'm going to do a chargeback", "intent": "complaint"}
+{"text": "you guys are useless", "intent": "complaint"}
+{"text": "I'm extremely disappointed", "intent": "complaint"}
+{"text": "never ordering again", "intent": "complaint"}
+{"text": "this is a joke", "intent": "complaint"}
+{"text": "awful customer service", "intent": "complaint"}
+{"text": "I'm furious about this", "intent": "complaint"}
+{"text": "complaint about my order", "intent": "complaint"}
+{"text": "I've been waiting forever, this is absurd", "intent": "complaint"}
+{"text": "your company is a scam", "intent": "complaint"}
+{"text": "thanks", "intent": "thanks"}
+{"text": "thank you", "intent": "thanks"}
+{"text": "thanks a lot", "intent": "thanks"}
+{"text": "that helped", "intent": "thanks"}
+{"text": "perfect, thanks", "intent": "thanks"}
+{"text": "great, thank you", "intent": "thanks"}
+{"text": "cheers", "intent": "thanks"}
+{"text": "bye", "intent": "thanks"}
+{"text": "goodbye", "intent": "thanks"}
+{"text": "that's all", "intent": "thanks"}
+{"text": "awesome thanks", "intent": "thanks"}
+{"text": "appreciate it", "intent": "thanks"}
+{"text": "thank you so much", "intent": "thanks"}
+{"text": "ok thanks bye", "intent": "thanks"}
+{"text": "got it, thanks", "intent": "thanks"}
+{"text": "that answers it", "intent": "thanks"}
+{"text": "all good now", "intent": "thanks"}
+{"text": "much appreciated", "intent": "thanks"}
+{"text": "what's the weather like", "intent": "other"}
+{"text": "tell me a joke", "intent": "other"}
+{"text": "who won the game last night", "intent": "other"}
+{"text": "can you write my essay", "intent": "other"}
+{"text": "what is the meaning of life", "intent": "other"}
+{"text": "recommend a restaurant", "intent": "other"}
+{"text": "how do I fix my car", "intent": "other"}
+{"text": "what's 2 plus 2", "intent": "other"}
+{"text": "do you sell groceries", "intent": "other"}
+{"text": "are you sentient", "intent": "other"}
+{"text": "translate this to french", "intent": "other"}
+{"text": "what's bitcoin price", "intent": "other"}
+{"text": "book me a flight", "intent": "other"}
+{"text": "who is the president", "intent": "other"}
+{"text": "help with my homework", "intent": "other"}
+{"text": "do you sell fishing licenses", "intent": "other"}
+{"text": "best hiking trail in Colorado", "intent": "other"}
+{"text": "can you hack a website", "intent": "other"}
+{"text": "should I invest in crypto", "intent": "other"}
+{"text": "what shares are good right now", "intent": "other"}
+{"text": "find me a cheap flight", "intent": "other"}
+{"text": "reserve a table for two", "intent": "other"}
+{"text": "rent me a car", "intent": "other"}
+{"text": "what's the news today", "intent": "other"}
+{"text": "can you do my math homework", "intent": "other"}
+{"text": "how do I cook pasta", "intent": "other"}
+{"text": "recommend a good book", "intent": "other"}
+{"text": "what's the time in Tokyo", "intent": "other"}
+{"text": "sing me a song", "intent": "other"}
+{"text": "how tall is mount everest", "intent": "other"}
+{"text": "is it going to rain tomorrow", "intent": "other"}
+{"text": "find a dentist near me", "intent": "other"}
+{"text": "what's your favourite color", "intent": "other"}
+{"text": "order me a pizza", "intent": "other"}

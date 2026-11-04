@@ -23,12 +23,38 @@ Typical chatbots make this worse: they guess, loop on "I didn't understand that"
 | A real person as soon as they need one, in the same chat window | The full transcript with the AI's intent and confidence for every reply |
 | No repeated questions after the handoff | Metrics: automation rate, response times, escalations, CSAT |
 
+## Measured, not guessed
+
+The NLP pipeline is evaluated on **130 held-out customer messages** that no model saw during training. Every threshold was tuned on a separate dev set, so these numbers are an honest estimate. CI re-runs the eval on every push and fails if quality drops.
+
+| | Baseline (regex rules + keyword search) | This project (trained models + embeddings) |
+| --- | ---: | ---: |
+| Intent accuracy (13 intents) | 53.8% | **93.8%** |
+| Right help-center article in top 3 | 69.6% | **88.0%** |
+| Escalation F1 (hand off exactly when needed) | 61.9% | **86.7%** |
+| Customers who needed a human and got one | 89.7% | **100%** |
+| Answerable questions resolved without a human | 57.1% | **86.8%** |
+
+Median pipeline latency is 12 ms per message on CPU, without the LLM call. The full report is in [`backend/eval/results.md`](backend/eval/results.md), and it is also shown in the dashboard's **Model quality** page.
+
+![Model quality page in the dashboard](docs/screenshots/dashboard-model-quality.png)
+
+**What the evaluation showed:**
+- **Embeddings beat keywords by a wide margin.** "How do I get my money back" shares no word with the refunds article, so keyword search can't find it, but its embedding sits right next to it.
+- **Embeddings alone (93.8%) slightly beat embeddings + TF-IDF (93.1%)** for intents, so production uses the simpler model.
+- **Mixing BM25 into the ranking made retrieval worse on this data** (83.7% vs 88.0% recall@3), so BM25 is kept only as an automatic fallback when the embedding model can't load. The fusion code stays, behind a weight set to 0, if a larger catalog with exact product names needs it.
+- **Some retrieval errors are content gaps, not model errors.** The damaged-delivery article never mentioned items arriving "broken" or "torn". Improving the article raised escalation F1.
+- **Known limitation:** "my tent arrived with a snapped pole" is read as a product question, so the bot cites the repairs article. It still opens a ticket for a person, which is the correct outcome.
+
 ## Features
 
 **Conversational AI and NLP**
-- **Retrieval-augmented generation (RAG).** The help center (Markdown files) is split into sections and indexed with BM25. The best-matching sections are passed to Claude, which must answer only from them and cite its sources.
-- **Two-stage intent classification.** A fast rule-based NLU layer detects intent, sentiment, order numbers and "needs manual action" signals on every message. Claude then returns its own intent, a confidence score and a handoff decision as **structured JSON output** (JSON schema), so the result is always machine-readable.
+- **Retrieval-augmented generation (RAG) with semantic search.** The help center (Markdown files) is split into sections and embedded with a local sentence-embedding model (`bge-small-en-v1.5`, ONNX on CPU, no API key). The best-matching sections are passed to Claude, which must answer only from them and cite its sources. BM25 keyword search takes over automatically if the model can't load, and an RRF fusion of both is available.
+- **Trained intent classifier.** A logistic-regression model on sentence embeddings recognizes 13 support intents and gives a probability that feeds the escalation decision. A second model detects messages that need a person to act (damaged or missing items, double charges, warranty claims), even when they use none of the usual keywords.
+- **Rules for the safety-critical signals.** Explicit requests for a human, negative sentiment and order numbers are still detected with deterministic rules, so they never depend on a model's mood.
+- **Claude adds its own judgment.** It returns `answer`, `intent`, `confidence`, `needs_human` and `cited_sources` as **structured JSON output** (JSON schema), so the result is always machine-readable.
 - **Intent-aware retrieval.** The detected intent boosts the matching part of the knowledge base ("can I return boots I wore?" goes to the returns policy, not the boot sizing guide).
+- **Evaluation harness.** A labeled train / dev / test split, a grid search on the dev set (`make tune`), a test report (`make eval`), and a CI quality gate.
 - **Order lookup.** Order numbers like `FW-10234` are recognized and resolved against the order data before the answer is written.
 - **Conversation context.** Short follow-ups ("and to Canada?") inherit the topic of the previous question.
 
@@ -49,7 +75,7 @@ Typical chatbots make this worse: they guess, loop on "I didn't understand that"
 - Refusal handling and Anthropic's server-side model fallback are enabled.
 - **Embeddable anywhere** with one `<script>` tag. The widget runs in an iframe, so it never conflicts with the host site's CSS.
 - The widget is responsive, keeps the conversation across page reloads, and supports keyboard use and screen-reader labels.
-- 28 backend tests and CI on GitHub Actions.
+- 37 backend tests, plus the NLP quality gate in CI on GitHub Actions.
 
 ## Screenshots
 
@@ -66,7 +92,7 @@ Typical chatbots make this worse: they guess, loop on "I didn't understand that"
 **Conversation transcript with intent and confidence for every reply**
 ![Conversations](docs/screenshots/dashboard-conversations.png)
 
-**Knowledge base retrieval tester**
+**Knowledge base retrieval tester:** type a customer question and see which sections the bot would retrieve
 ![Knowledge base](docs/screenshots/dashboard-knowledge-base.png)
 
 <p align="center">
@@ -88,8 +114,9 @@ flowchart LR
 
     subgraph API["FastAPI backend"]
         E["Support engine"]
-        N["NLU<br/>intent · sentiment · entities"]
-        R["Retriever<br/>BM25 + intent boost"]
+        N["NLU<br/>trained intent model · needs-action model<br/>rules: sentiment · entities · human request"]
+        R["Retriever<br/>embeddings + intent boost<br/>(BM25 fallback)"]
+        EM["Local embedding model<br/>bge-small, ONNX"]
         P{{"LLM provider"}}
         C["Claude<br/>structured JSON output"]
         M["Offline provider<br/>extractive answers"]
@@ -98,6 +125,8 @@ flowchart LR
     end
 
     KB[/"Help center<br/>Markdown"/] --> R
+    EM --- N
+    EM --- R
     O[/"Order data"/] --> E
     W -- "POST /api/chat" --> E
     E --> N --> R --> P
@@ -110,9 +139,9 @@ flowchart LR
 
 **Request flow for one customer message**
 
-1. **NLU** classifies intent and sentiment, extracts order numbers and flags issues that need a person.
+1. **NLU**: the trained model classifies the intent and detects issues that need a person. Rules add sentiment, order numbers and explicit requests for a human.
 2. **Order lookup** fetches any referenced order.
-3. **Retrieval** picks the most relevant help-center sections, weighted by intent.
+3. **Retrieval** picks the most relevant help-center sections by meaning, weighted by intent.
 4. **The LLM** writes the answer from that context only and returns `answer`, `intent`, `confidence`, `needs_human`, `escalation_reason` and `cited_sources` as JSON.
 5. **The escalation policy** combines the NLU signals and the model's output. If it escalates, a ticket is created and the customer is told a specialist will take over in the same chat.
 6. Everything is stored with its response time, so the dashboard metrics come from real data.
@@ -166,11 +195,15 @@ See [`frontend/public/embed-demo.html`](frontend/public/embed-demo.html) (served
 
 Replace the Markdown files in [`backend/data/knowledge_base/`](backend/data/knowledge_base/). Each `## Heading` becomes one retrievable section. Connect `orders.json` to your real order system by replacing the lookup in `SupportEngine`.
 
-### Run the tests
+### Run the tests and the evaluation
 
 ```bash
-make test
+make test   # unit and API tests, frontend type-check and build
+make eval   # NLP quality on the held-out test set, writes backend/eval/results.md
+make tune   # grid-search thresholds and weights on the dev set
 ```
+
+The first run downloads the 65 MB embedding model once into `backend/.cache/models`. The Docker image already contains it, so containers start fully offline.
 
 ## API
 
@@ -191,7 +224,8 @@ make test
 | Layer | Technology |
 | --- | --- |
 | LLM | Claude via the official `anthropic` Python SDK (structured outputs, refusal fallback) |
-| NLP and retrieval | Rule-based NLU (intent, sentiment, entities), BM25 retrieval with intent boosting |
+| NLP and retrieval | Sentence embeddings (fastembed, `bge-small-en-v1.5`), scikit-learn intent and needs-action classifiers, BM25 + Reciprocal Rank Fusion, rule-based sentiment and entities |
+| Evaluation | Labeled train / dev / test split, grid search, precision / recall / F1, Recall@k, MRR, CI quality gate |
 | Backend | Python 3.12, FastAPI, Pydantic, SQLite |
 | Frontend | React 19, TypeScript, Vite, Tailwind CSS 4, Recharts, lucide icons |
 | Tooling | uv, pytest, GitHub Actions, Docker |
@@ -203,12 +237,16 @@ backend/
   app/
     main.py              FastAPI routes
     engine.py            Pipeline + escalation policy
-    intents.py           NLU: intents, sentiment, entities
-    knowledge_base.py    Markdown chunking + BM25 retriever
+    intents.py           NLU: rules for sentiment, entities, human requests
+    intent_model.py      Trained intent and needs-action classifiers
+    embeddings.py        Local sentence-embedding model
+    knowledge_base.py    Markdown chunking, BM25, dense and hybrid retrieval
     providers/           LLM provider interface, Claude, offline fallback
     store.py             SQLite persistence + metrics
     seed.py              Sample history for the dashboard
   data/knowledge_base/   Sample help center (fictional store)
+  data/nlu/              Training data for the classifiers
+  eval/                  dev / test sets, run_eval.py, tune.py, results.md
   tests/
 frontend/
   src/components/ChatWidget.tsx   The customer chat widget
@@ -219,12 +257,12 @@ frontend/
 ## Roadmap
 
 - [ ] Streaming responses (token by token) over Server-Sent Events
-- [ ] Vector embeddings + hybrid search for large knowledge bases
+- [ ] LLM-as-judge evaluation of answer groundedness with Claude, next to the offline metrics
+- [ ] Active learning: turn agent corrections and escalated chats into new training examples
 - [ ] LLM-written ticket summaries and suggested replies for agents
 - [ ] Helpdesk integrations: Zendesk, Freshdesk, Intercom, Slack alerts for urgent tickets
 - [ ] Multi-language support (auto-detect and answer in the customer's language)
 - [ ] Agent accounts, authentication and role-based access
-- [ ] An evaluation set to measure answer accuracy and escalation precision on every change
 - [ ] Postgres and WebSockets for multi-instance deployments
 
 ## Note

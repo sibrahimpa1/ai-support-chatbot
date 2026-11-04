@@ -12,6 +12,10 @@ import re
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.embeddings import Embedder
 
 STOPWORDS = frozenset(
     """a an and are as at be but by can do does for from have how i if in into is it
@@ -52,6 +56,7 @@ class Chunk:
 class SearchResult:
     chunk: Chunk
     score: float
+    similarity: float | None = None  # cosine similarity, when embeddings are used
 
 
 def load_chunks(directory: Path) -> list[Chunk]:
@@ -134,3 +139,54 @@ class Retriever:
             return 0.0
         chunk_terms = set(tokenize(f"{result.chunk.title} {result.chunk.text}"))
         return len(terms & chunk_terms) / len(terms)
+
+
+class HybridRetriever:
+    """BM25 (exact terms) + dense embeddings (meaning), merged with Reciprocal Rank Fusion.
+
+    BM25 is precise on product names and policy words; embeddings catch
+    paraphrases with no shared words ("get my money back" -> "Refund timing").
+    RRF combines the two rankings without having to calibrate their very
+    different score scales: each list contributes 1 / (k + rank).
+    """
+
+    def __init__(self, chunks: list[Chunk], embedder: "Embedder", rrf_k: int = 60,
+                 min_similarity: float = 0.55, bm25_weight: float = 1.0):
+        self.chunks = chunks
+        self.bm25_weight = bm25_weight
+        self.bm25 = Retriever(chunks)
+        self.embedder = embedder
+        self.rrf_k = rrf_k
+        self.min_similarity = min_similarity
+        self._vectors = embedder.embed([f"{c.title}. {c.text}" for c in chunks])
+
+    def similarities(self, query: str):
+        return self._vectors @ self.embedder.embed_one(query)
+
+    def dense_search(self, query: str, top_k: int = 4) -> list[SearchResult]:
+        sims = self.similarities(query)
+        order = sims.argsort()[::-1][:top_k]
+        return [SearchResult(self.chunks[i], float(sims[i]), float(sims[i])) for i in order]
+
+    def search(
+        self, query: str, top_k: int = 4, boost_sources: tuple[str, ...] = ()
+    ) -> list[SearchResult]:
+        sims = self.similarities(query)
+        fused: dict[int, float] = {}
+        index = {c.id: i for i, c in enumerate(self.chunks)}
+
+        for rank, result in enumerate(self.bm25.search(query, len(self.chunks), boost_sources)):
+            i = index[result.chunk.id]
+            fused[i] = fused.get(i, 0.0) + self.bm25_weight / (self.rrf_k + rank)
+        dense_order = [i for i in sims.argsort()[::-1] if sims[i] >= self.min_similarity]
+        for rank, i in enumerate(dense_order):
+            fused[i] = fused.get(i, 0.0) + 1 / (self.rrf_k + rank)
+
+        for i in fused:
+            if self.chunks[i].id.split("#")[0] in boost_sources:
+                fused[i] *= 1.15
+        ranked = sorted(fused.items(), key=lambda kv: kv[1], reverse=True)[:top_k]
+        return [SearchResult(self.chunks[i], score, float(sims[i])) for i, score in ranked]
+
+    def coverage(self, query: str, result: SearchResult) -> float:
+        return self.bm25.coverage(query, result)
