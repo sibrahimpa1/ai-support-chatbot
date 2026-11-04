@@ -234,3 +234,7 @@ Fernway Outdoor is a fictional company. All orders, customers and conversations 
 ## License
 
 [MIT](LICENSE)
+
+## Author
+
+Built by Senka Ibrahimpašić ([@sibrahimpa1](https://github.com/sibrahimpa1)).
