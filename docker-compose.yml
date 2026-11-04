@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_PATH: /data/support.db
+    volumes:
+      - support-data:/data
+
+volumes:
+  support-data:

@@ -1,0 +1,7 @@
+{
+  "FW-10234": {"customer": "Alex", "status": "Shipped", "carrier": "UPS", "tracking": "1Z999AA10123456784", "items": ["Ridgeline 2P Tent", "Trail Mug"], "eta": "Thursday", "total": 289.0},
+  "FW-10235": {"customer": "Sam", "status": "Processing", "carrier": null, "tracking": null, "items": ["Summit Rain Jacket (M)"], "eta": "ships within 24 hours", "total": 159.0},
+  "FW-10236": {"customer": "Jordan", "status": "Delivered", "carrier": "USPS", "tracking": "9400111899223344556677", "items": ["Cascade 45L Backpack"], "eta": "delivered Monday", "total": 179.0},
+  "FW-10237": {"customer": "Riley", "status": "Out for delivery", "carrier": "FedEx", "tracking": "771234567890", "items": ["Basecamp Hiking Boots (10.5)", "Wool Socks x3"], "eta": "today by 8 PM", "total": 214.5},
+  "FW-10238": {"customer": "Casey", "status": "Cancelled", "carrier": null, "tracking": null, "items": ["Drift Inflatable Kayak"], "eta": null, "total": 499.0}
+}
